@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ContactSchema } from '../../schemas/contact.schema';
 import { ContactModule } from '../contact/contact.module';
@@ -14,11 +14,11 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
     MongooseModule.forFeature([{ name: 'Prod', schema: ContactSchema }]),
     ContactModule,
   ],
-  providers:[
+  providers: [
     {
       provide: APP_INTERCEPTOR,
       useClass: LoggingInterceptor,
     },
-  ]
+  ],
 })
 export class AppModule {}
